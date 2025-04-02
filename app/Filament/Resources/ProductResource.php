@@ -23,17 +23,22 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('code')
+                Forms\Components\Section::make('Product')
+                ->description('Put the Part details in.')
+                ->schema([
+                    Forms\Components\TextInput::make('Code')
                     ->required(),
-                Forms\Components\TextInput::make('no')
-                    ->required(),
-                Forms\Components\TextInput::make('name'),
-                Forms\Components\TextInput::make('std_price')
-                    ->numeric(),
-                Forms\Components\FileUpload::make('pic')
-                ->avatar()
-                ->directory('form-attachments')
-                ->visibility('public'),
+                    Forms\Components\TextInput::make('Part No')
+                        ->required(),
+                    Forms\Components\TextInput::make('Part name'),
+                    Forms\Components\TextInput::make('Qty')
+                        ->numeric(),
+                        Forms\Components\FileUpload::make('Upload Image')
+                        ->avatar()
+                        ->directory('form-attachments')
+                        ->visibility('public'),
+                ])->columns(2),
+
             ]);
     }
 
@@ -41,17 +46,17 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('pic')
+                Tables\Columns\ImageColumn::make('Upload Image')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('code')
+                Tables\Columns\TextColumn::make('Code')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('no')
+                Tables\Columns\TextColumn::make('Part No.')
                     ->searchable()
                     ->badge()
                     ->color('success'),
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('Part name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('std_price')
+                Tables\Columns\TextColumn::make('Qty')
                     ->numeric()
                     ->sortable(),
 
