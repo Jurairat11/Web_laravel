@@ -41,6 +41,8 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('pic')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('code')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('no')
@@ -52,8 +54,7 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('std_price')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\ImageColumn::make('pic')
-                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
