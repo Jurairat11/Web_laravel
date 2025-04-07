@@ -14,6 +14,7 @@ class Product extends Model
         'code',
         'no',
         'name',
+        'type',
         'std_price',
         'pic'];
 }

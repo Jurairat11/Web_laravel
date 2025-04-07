@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
 
 class ProductResource extends Resource
 {
@@ -33,6 +35,14 @@ class ProductResource extends Resource
                     Forms\Components\TextInput::make('Part No')
                         ->required(),
                     Forms\Components\TextInput::make('Part name'),
+                    Select::make('type')
+                    ->label('ประเภทสินค้า')
+                    ->options([
+                        'raw' => 'Raw Material',
+                        'semi' => 'Semi-Finished',
+                        'finished' => 'Finished Goods',
+                    ])
+                    ->required(),
                     Forms\Components\TextInput::make('Qty')
                         ->numeric(),
                         Forms\Components\FileUpload::make('Upload Image')
@@ -58,10 +68,16 @@ class ProductResource extends Resource
                     ->color('success'),
                 Tables\Columns\TextColumn::make('Part name')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('type')
+                    ->label('ประเภทสินค้า')
+                    ->enum([
+                        'raw' => 'Raw Material',
+                        'semi' => 'Semi-Finished',
+                        'finished' => 'Finished Goods',
+                    ]),
                 Tables\Columns\TextColumn::make('Qty')
                     ->numeric()
                     ->sortable(),
-
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
